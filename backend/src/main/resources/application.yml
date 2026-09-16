@@ -3,7 +3,7 @@ spring:
     name: taskboard-backend
 
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/taskboard}
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/taskboard}
     username: ${DB_USERNAME:taskboard}
     password: ${DB_PASSWORD:taskboard}
 
