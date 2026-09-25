@@ -1,6 +1,7 @@
 package com.example.taskboard.dto;
 
 import com.example.taskboard.entity.TaskStatus;
+import com.example.taskboard.entity.TaskPriority;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,6 +19,9 @@ public record TaskRequest(
 
         @NotNull(message = "ステータスは必須です")
         TaskStatus status,
+
+        @NotNull(message = "優先度にはHIGH、MEDIUM、LOWのいずれかを指定してください。")
+        TaskPriority priority,
 
         LocalDate dueDate
 ) {

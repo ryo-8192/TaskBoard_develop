@@ -3,6 +3,7 @@ package com.example.taskboard.service;
 import com.example.taskboard.dto.TaskRequest;
 import com.example.taskboard.dto.TaskResponse;
 import com.example.taskboard.entity.Task;
+import com.example.taskboard.entity.TaskPriority;
 import com.example.taskboard.entity.TaskStatus;
 import com.example.taskboard.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
@@ -24,15 +25,23 @@ class TaskServiceTest {
                 "テストタスク",
                 "説明",
                 TaskStatus.TODO,
+                TaskPriority.HIGH,
                 LocalDate.of(2026, 9, 30)
         );
 
-        when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
+        when(taskRepository.findById(1L))
+                .thenReturn(Optional.of(task));
 
         TaskResponse response = taskService.findById(1L);
 
-        assertThat(response.title()).isEqualTo("テストタスク");
-        assertThat(response.status()).isEqualTo(TaskStatus.TODO);
+        assertThat(response.title())
+                .isEqualTo("テストタスク");
+
+        assertThat(response.status())
+                .isEqualTo(TaskStatus.TODO);
+
+        assertThat(response.priority())
+                .isEqualTo(TaskPriority.HIGH);
     }
 
     @Test
@@ -41,22 +50,32 @@ class TaskServiceTest {
                 "変更前",
                 "説明",
                 TaskStatus.TODO,
-                null
+                TaskPriority.MEDIUM,
+                LocalDate.of(2026, 9, 30)
         );
 
-        when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
+        when(taskRepository.findById(1L))
+                .thenReturn(Optional.of(task));
 
         TaskRequest request = new TaskRequest(
                 "変更後",
                 "更新しました",
                 TaskStatus.DONE,
+                TaskPriority.MEDIUM,
                 LocalDate.of(2026, 10, 1)
         );
 
         TaskResponse response = taskService.update(1L, request);
 
-        assertThat(response.title()).isEqualTo("変更後");
-        assertThat(response.status()).isEqualTo(TaskStatus.DONE);
+        assertThat(response.title())
+                .isEqualTo("変更後");
+
+        assertThat(response.status())
+                .isEqualTo(TaskStatus.DONE);
+
+        assertThat(response.priority())
+                .isEqualTo(TaskPriority.MEDIUM);
+
         verify(taskRepository).findById(1L);
     }
 }

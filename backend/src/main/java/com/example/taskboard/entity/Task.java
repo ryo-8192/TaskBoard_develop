@@ -23,6 +23,10 @@ public class Task {
     @Column(nullable = false, length = 20)
     private TaskStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private TaskPriority priority;
+
     private LocalDate dueDate;
 
     @Column(nullable = false, updatable = false)
@@ -34,10 +38,11 @@ public class Task {
     protected Task() {
     }
 
-    public Task(String title, String description, TaskStatus status, LocalDate dueDate) {
+    public Task(String title, String description, TaskStatus status, TaskPriority priority, LocalDate dueDate) {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.priority = priority;
         this.dueDate = dueDate;
     }
 
@@ -57,10 +62,11 @@ public class Task {
         updatedAt = LocalDateTime.now();
     }
 
-    public void update(String title, String description, TaskStatus status, LocalDate dueDate) {
+    public void update(String title, String description, TaskStatus status, TaskPriority priority, LocalDate dueDate) {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.priority = priority;
         this.dueDate = dueDate;
     }
 
@@ -80,6 +86,10 @@ public class Task {
         return status;
     }
 
+    public TaskPriority getPriority() {
+        return priority;
+    }
+
     public LocalDate getDueDate() {
         return dueDate;
     }
@@ -90,5 +100,9 @@ public class Task {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setPriority(TaskPriority taskPriority) {
+        this.priority = taskPriority;
     }
 }

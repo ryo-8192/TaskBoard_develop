@@ -2,6 +2,7 @@ package com.example.taskboard.dto;
 
 import com.example.taskboard.entity.Task;
 import com.example.taskboard.entity.TaskStatus;
+import com.example.taskboard.entity.TaskPriority;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ public record TaskResponse(
         String title,
         String description,
         TaskStatus status,
+        TaskPriority priority,
         LocalDate dueDate,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
@@ -22,6 +24,7 @@ public record TaskResponse(
                 task.getTitle(),
                 task.getDescription(),
                 task.getStatus(),
+                task.getPriority(),
                 task.getDueDate(),
                 task.getCreatedAt(),
                 task.getUpdatedAt()

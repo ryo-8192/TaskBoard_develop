@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react'
-import type { Task, TaskRequest, TaskStatus } from '../types/task'
+import type { Task, TaskRequest, TaskStatus, TaskPriority } from '../types/task'
 
 type Props = {
   editingTask: Task | null
@@ -12,6 +12,7 @@ const emptyForm: TaskRequest = {
   title: '',
   description: '',
   status: 'TODO',
+  priority: 'MEDIUM',
   dueDate: null,
 }
 
@@ -33,6 +34,7 @@ export function TaskForm({
       title: editingTask.title,
       description: editingTask.description ?? '',
       status: editingTask.status,
+      priority: editingTask.priority,
       dueDate: editingTask.dueDate,
     })
   }, [editingTask])
@@ -105,6 +107,20 @@ export function TaskForm({
             <option value="TODO">未着手</option>
             <option value="IN_PROGRESS">進行中</option>
             <option value="DONE">完了</option>
+          </select>
+        </label>
+
+        <label>
+          優先度
+          <select
+            value={form.priority}
+            onChange={(event) =>
+              updateField('priority', event.target.value as TaskPriority)
+            }
+          >
+            <option value="HIGH">高</option>
+            <option value="MEDIUM">中</option>
+            <option value="LOW">低</option>
           </select>
         </label>
 

@@ -38,6 +38,7 @@ public class TaskService {
                 request.title(),
                 request.description(),
                 request.status(),
+                request.priority(),
                 request.dueDate()
         );
 
@@ -52,6 +53,7 @@ public class TaskService {
                 request.title(),
                 request.description(),
                 request.status(),
+                request.priority(),
                 request.dueDate()
         );
 

@@ -1,4 +1,4 @@
-import type { Task, TaskStatus } from '../types/task'
+import type { Task, TaskStatus, TaskPriority} from '../types/task'
 
 type Props = {
   tasks: Task[]
@@ -10,6 +10,12 @@ const statusLabel: Record<TaskStatus, string> = {
   TODO: '未着手',
   IN_PROGRESS: '進行中',
   DONE: '完了',
+}
+
+const priorityLabel: Record<TaskPriority, string> = {
+  HIGH: '高',
+  MEDIUM: '中',
+  LOW: '低',
 }
 
 export function TaskList({ tasks, onEdit, onDelete }: Props) {
@@ -37,6 +43,9 @@ export function TaskList({ tasks, onEdit, onDelete }: Props) {
                 <h3>{task.title}</h3>
                 <span className={`status status-${task.status.toLowerCase()}`}>
                   {statusLabel[task.status]}
+                </span>
+                <span className={`priority priority-${task.priority.toLowerCase()}`}>
+                  {priorityLabel[task.priority]}
                 </span>
               </div>
 
